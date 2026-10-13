@@ -1,0 +1,6 @@
+{# title: text; description/content: render arrays; actions: [{label,url,secondary}]. #}
+{% if eyebrow %}<span class="eyebrow">{{ eyebrow }}</span>{% endif %}
+<h1 class="display-title">{{ title }}</h1>
+{% if description %}<div class="prose">{{ description }}</div>{% endif %}
+{% if actions %}<div class="design-actions">{% for action in actions %}<a class="design-button{{ action.secondary ? ' design-button--secondary' : '' }}" href="{{ action.url }}">{{ action.label }}</a>{% endfor %}</div>{% endif %}
+{{ content }}

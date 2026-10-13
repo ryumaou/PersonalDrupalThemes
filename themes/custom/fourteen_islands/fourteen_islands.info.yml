@@ -1,0 +1,40 @@
+name: 14islands
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - fourteen_islands/base
+  - fourteen_islands/messages
+  - core/normalize
+  - fourteen_islands/design
+libraries-extend:
+  user/drupal.user:
+    - fourteen_islands/user
+  core/drupal.dropbutton:
+    - fourteen_islands/dropbutton
+  core/drupal.dialog:
+    - fourteen_islands/dialog
+  file/drupal.file:
+    - fourteen_islands/file
+  core/drupal.item-list:
+    - fourteen_islands/item-list
+  core/drupal.progress:
+    - fourteen_islands/progress
+  core/drupal.tablesort:
+    - fourteen_islands/drupal.tablesort
+description: "Monochrome editorial gallery — A pristine gallery wall where oversized black typography and full-bleed photography exist without decoration, color, or UI noise."
+core_version_requirement: ^11
+generator: starterkit_theme:11.3.0
+regions:
+  header: Branding
+  primary_menu: Primary navigation
+  secondary_menu: Actions
+  breadcrumb: Breadcrumb
+  highlighted: Status messages
+  help: Help
+  hero: Hero
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  feature: Feature sections
+  footer: Footer

@@ -1,0 +1,23 @@
+/* Locally served OFL font substitutes. No external font requests. */
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/spectral-0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/spectral-1.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Spectral';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/spectral-2.ttf) format('truetype');
+}
+:root { --font-cahuenga: 'Cahuenga','Spectral',Georgia,serif; --font-spectral: 'Spectral',Georgia,serif; }

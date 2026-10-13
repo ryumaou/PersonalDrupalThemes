@@ -1,0 +1,40 @@
+name: Bpowell
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - bpowell/base
+  - bpowell/messages
+  - core/normalize
+  - bpowell/design
+libraries-extend:
+  user/drupal.user:
+    - bpowell/user
+  core/drupal.dropbutton:
+    - bpowell/dropbutton
+  core/drupal.dialog:
+    - bpowell/dialog
+  file/drupal.file:
+    - bpowell/file
+  core/drupal.item-list:
+    - bpowell/item-list
+  core/drupal.progress:
+    - bpowell/progress
+  core/drupal.tablesort:
+    - bpowell/drupal.tablesort
+description: "type as architecture on white plaster"
+core_version_requirement: ^11
+generator: starterkit_theme:11.3.0
+regions:
+  header: Branding
+  primary_menu: Primary navigation
+  secondary_menu: Actions
+  breadcrumb: Breadcrumb
+  highlighted: Status messages
+  help: Help
+  hero: Hero
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  feature: Feature sections
+  footer: Footer

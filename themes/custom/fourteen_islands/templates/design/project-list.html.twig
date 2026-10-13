@@ -1,0 +1,3 @@
+{# projects: [{title,url,content}]. #}
+{% if label %}<h2 class="eyebrow">{{ label }}</h2>{% endif %}
+<ul class="project-list">{% for project in projects %}<li>{% if project.url %}<a href="{{ project.url }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}{{ project.content }}</li>{% endfor %}</ul>

@@ -1,0 +1,1 @@
+<div class="footer-grid">{% for group in groups %}<div><h3>{{ group.title }}</h3><ul>{% for link in group.links %}<li><a href="{{ link.url }}">{{ link.label }}</a></li>{% endfor %}</ul></div>{% endfor %}</div>

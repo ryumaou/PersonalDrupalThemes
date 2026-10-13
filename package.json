@@ -1,0 +1,15 @@
+{
+  "name": "personal-drupal-themes",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "preview": "node scripts/preview.mjs"
+  },
+  "devDependencies": {
+    "css-tree": "3.1.0",
+    "js-yaml": "4.1.0",
+    "linkedom": "0.18.12",
+    "twig": "1.17.1"
+  }
+}

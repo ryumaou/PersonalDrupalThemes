@@ -1,0 +1,21 @@
+{# Drupal regions remain editable through Block layout; no demo content is injected. #}
+<div class="layout-container">
+  <div class="site-header-wrap"><header class="site-header" role="banner">
+    <div class="site-brand">{{ page.header }}</div>
+    {% if page.primary_menu %}<nav class="site-navigation" aria-label="{{ 'Primary navigation'|t }}">{{ page.primary_menu }}</nav>{% endif %}
+    {% if page.secondary_menu %}<div class="site-actions">{{ page.secondary_menu }}</div>{% endif %}
+  </header></div>
+  <div class="site-shell">
+    {{ page.breadcrumb }}
+    {{ page.highlighted }}
+    {{ page.help }}
+    {% if page.hero %}<section class="site-hero" aria-label="{{ 'Introduction'|t }}">{{ page.hero }}</section>{% endif %}
+    <div class="site-grid{{ page.sidebar_first ? ' has-left' : '' }}{{ page.sidebar_second ? ' has-right' : '' }}">
+      {% if page.sidebar_first %}<aside class="site-sidebar site-sidebar--left" aria-label="{{ 'Primary sidebar'|t }}">{{ page.sidebar_first }}</aside>{% endif %}
+      <main class="site-content layout-content" id="main-content" tabindex="-1">{{ page.content }}</main>
+      {% if page.sidebar_second %}<aside class="site-sidebar site-sidebar--right" aria-label="{{ 'Secondary sidebar'|t }}">{{ page.sidebar_second }}</aside>{% endif %}
+    </div>
+    {% if page.feature %}<section class="site-features" aria-label="{{ 'Features'|t }}">{{ page.feature }}</section>{% endif %}
+  </div>
+  {% if page.footer %}<footer class="site-footer" role="contentinfo"><div class="site-footer-inner">{{ page.footer }}</div></footer>{% endif %}
+</div>

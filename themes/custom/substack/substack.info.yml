@@ -1,0 +1,40 @@
+name: Substack
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - substack/base
+  - substack/messages
+  - core/normalize
+  - substack/design
+libraries-extend:
+  user/drupal.user:
+    - substack/user
+  core/drupal.dropbutton:
+    - substack/dropbutton
+  core/drupal.dialog:
+    - substack/dialog
+  file/drupal.file:
+    - substack/file
+  core/drupal.item-list:
+    - substack/item-list
+  core/drupal.progress:
+    - substack/progress
+  core/drupal.tablesort:
+    - substack/drupal.tablesort
+description: "orange ink on a newsroom desk"
+core_version_requirement: ^11
+generator: starterkit_theme:11.3.0
+regions:
+  header: Branding
+  primary_menu: Primary navigation
+  secondary_menu: Actions
+  breadcrumb: Breadcrumb
+  highlighted: Status messages
+  help: Help
+  hero: Hero
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  feature: Feature sections
+  footer: Footer

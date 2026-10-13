@@ -1,0 +1,7 @@
+{# title: text; content/image: render arrays; url optional; category optional. #}
+<article class="design-card{{ featured ? ' design-card--featured' : '' }}">
+  {{ image }}
+  {% if title %}<h3>{% if url %}<a href="{{ url }}">{{ title }}</a>{% else %}{{ title }}{% endif %}</h3>{% endif %}
+  {% if category %}<span class="project-category">{{ category }}</span>{% endif %}
+  {{ content }}
+</article>

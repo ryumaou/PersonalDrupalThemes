@@ -1,0 +1,6 @@
+{# title: text; content: render array; action: {label,url}; class must be a trusted variant. #}
+<section class="design-band{{ teal ? ' design-band--teal' : '' }}">
+  {% if eyebrow %}<span class="eyebrow">{{ eyebrow }}</span>{% endif %}
+  {% if title %}<h2>{{ title }}</h2>{% endif %}{{ content }}
+  {% if action %}<div class="design-actions"><a class="design-button" href="{{ action.url }}">{{ action.label }}</a></div>{% endif %}
+</section>

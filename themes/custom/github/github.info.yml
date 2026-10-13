@@ -1,0 +1,40 @@
+name: GitHub
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - github/base
+  - github/messages
+  - core/normalize
+  - github/design
+libraries-extend:
+  user/drupal.user:
+    - github/user
+  core/drupal.dropbutton:
+    - github/dropbutton
+  core/drupal.dialog:
+    - github/dialog
+  file/drupal.file:
+    - github/file
+  core/drupal.item-list:
+    - github/item-list
+  core/drupal.progress:
+    - github/progress
+  core/drupal.tablesort:
+    - github/drupal.tablesort
+description: "cosmic command deck with bioluminescent waypoints — a dark, atmospheric workspace where a single green glow marks the path forward"
+core_version_requirement: ^11
+generator: starterkit_theme:11.3.0
+regions:
+  header: Branding
+  primary_menu: Primary navigation
+  secondary_menu: Actions
+  breadcrumb: Breadcrumb
+  highlighted: Status messages
+  help: Help
+  hero: Hero
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  feature: Feature sections
+  footer: Footer

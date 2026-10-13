@@ -1,0 +1,40 @@
+name: Evernote
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - evernote/base
+  - evernote/messages
+  - core/normalize
+  - evernote/design
+libraries-extend:
+  user/drupal.user:
+    - evernote/user
+  core/drupal.dropbutton:
+    - evernote/dropbutton
+  core/drupal.dialog:
+    - evernote/dialog
+  file/drupal.file:
+    - evernote/file
+  core/drupal.item-list:
+    - evernote/item-list
+  core/drupal.progress:
+    - evernote/progress
+  core/drupal.tablesort:
+    - evernote/drupal.tablesort
+description: "Afternoon sun on cream paper — a warm, lived-in notebook where white cards float on beige, dark text breathes, and one lime-green highlighter marks the important things."
+core_version_requirement: ^11
+generator: starterkit_theme:11.3.0
+regions:
+  header: Branding
+  primary_menu: Primary navigation
+  secondary_menu: Actions
+  breadcrumb: Breadcrumb
+  highlighted: Status messages
+  help: Help
+  hero: Hero
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  feature: Feature sections
+  footer: Footer

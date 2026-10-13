@@ -1,0 +1,40 @@
+name: Goodnotes
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - goodnotes/base
+  - goodnotes/messages
+  - core/normalize
+  - goodnotes/design
+libraries-extend:
+  user/drupal.user:
+    - goodnotes/user
+  core/drupal.dropbutton:
+    - goodnotes/dropbutton
+  core/drupal.dialog:
+    - goodnotes/dialog
+  file/drupal.file:
+    - goodnotes/file
+  core/drupal.item-list:
+    - goodnotes/item-list
+  core/drupal.progress:
+    - goodnotes/progress
+  core/drupal.tablesort:
+    - goodnotes/drupal.tablesort
+description: "Paper-white command canvas — a blank notebook page where every tool snap into place without decoration."
+core_version_requirement: ^11
+generator: starterkit_theme:11.3.0
+regions:
+  header: Branding
+  primary_menu: Primary navigation
+  secondary_menu: Actions
+  breadcrumb: Breadcrumb
+  highlighted: Status messages
+  help: Help
+  hero: Hero
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  feature: Feature sections
+  footer: Footer

@@ -1,0 +1,18 @@
+{# Feed layout: branding/navigation form the left rail, content remains Drupal content. #}
+<div class="layout-container"><div class="site-shell">
+  {{ page.highlighted }}{{ page.help }}
+  <div class="site-grid has-left{{ page.sidebar_second ? ' has-right' : '' }}">
+    <aside class="site-sidebar site-sidebar--left" aria-label="{{ 'Site navigation'|t }}">
+      {{ page.header }}
+      {% if page.primary_menu %}<nav aria-label="{{ 'Primary navigation'|t }}">{{ page.primary_menu }}</nav>{% endif %}
+      {{ page.secondary_menu }}{{ page.sidebar_first }}
+    </aside>
+    <main class="site-content layout-content" id="main-content" tabindex="-1">
+      {{ page.breadcrumb }}
+      {% if page.hero %}<section class="site-hero" aria-label="{{ 'Introduction'|t }}">{{ page.hero }}</section>{% endif %}
+      {{ page.content }}
+      {% if page.feature %}<section class="site-features" aria-label="{{ 'Featured publications'|t }}">{{ page.feature }}</section>{% endif %}
+    </main>
+    {% if page.sidebar_second %}<aside class="site-sidebar site-sidebar--right" aria-label="{{ 'Recommendations'|t }}">{{ page.sidebar_second }}</aside>{% endif %}
+  </div>
+</div>{% if page.footer %}<footer class="site-footer" role="contentinfo"><div class="site-footer-inner">{{ page.footer }}</div></footer>{% endif %}</div>
