@@ -27,6 +27,12 @@ drush cache:rebuild
 
 Each theme’s README explains regions, reusable Twig components and font choices. Place site branding, menus, status messages, page title and main content through Structure → Block layout for the selected theme. Add your own Hero, Feature, sidebar and footer blocks. Content types, media, Views, authentication, search and subscription functionality belong to the Drupal site and are not created by a theme.
 
+## Main menu subitems
+
+Main menu blocks starting at level 1 include children of page-less parents even when those parents are not marked Expanded. Regular page links keep Drupal’s configured expansion and active-trail behavior. Configured menu depth remains respected; a block limited to one level still shows only that level. Set its displayed levels to Unlimited (or at least two) to show subitems.
+
+Use Drupal's `<nolink>` or `<button>` destination for a parent that has no page. Parents with visible children use a native disclosure that opens with click, touch, Enter or Space, including when JavaScript is unavailable. Parents with real URLs retain their links. Rebuild Drupal caches after installing these changes.
+
 ## Preview
 
 Open [previews/index.html](previews/index.html) in a browser. The preview pages use the exact theme CSS and JavaScript with clearly labeled sample content; they do not require Drupal or a build step. For a local HTTP preview with Node installed:

@@ -19,3 +19,6 @@ function evernote_preprocess_image_widget(array &$variables): void {
     unset($data['preview']);
   }
 }
+
+// Custom navigation support.
+require_once __DIR__ . '/includes/navigation.inc';

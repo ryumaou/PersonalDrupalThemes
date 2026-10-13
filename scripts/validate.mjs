@@ -24,7 +24,7 @@ export async function validate(root) {
     for (const [source, expected] of Object.entries(provenance.source_sha256)) {
       const target = source.replaceAll('starterkit_theme', id);
       const bytes = await fs.readFile(path.join(dir, target));
-      const sourceBytes = source.endsWith('.png') ? bytes : Buffer.from(bytes.toString().replaceAll(id, 'starterkit_theme').replaceAll(theme.name, 'Starterkit theme'));
+      const sourceBytes = source.endsWith('.png') ? bytes : Buffer.from(bytes.toString().split('\n// Custom navigation support.\n')[0].replaceAll(id, 'starterkit_theme').replaceAll(theme.name, 'Starterkit theme'));
       assert(hash(sourceBytes) === expected, id + ': inherited file differs: ' + target);
       counts.upstreamFiles++;
     }
@@ -37,6 +37,41 @@ export async function validate(root) {
       for (const group of Object.values(library.css || {})) for (const asset of Object.keys(group)) { await fs.access(path.join(dir, asset)); counts.libraryAssets++; }
       for (const asset of Object.keys(library.js || {})) { await fs.access(path.join(dir, asset)); counts.libraryAssets++; }
     }
+    // Guard against inherited details spacing and the nested-menu display rule.
+    const designCss = await fs.readFile(path.join(dir, 'css/design.css'), 'utf8');
+    const navigationRules = new Map();
+    csstree.walk(csstree.parse(designCss), { visit: 'Rule', enter(rule) {
+      if (rule.prelude?.type !== 'SelectorList') return;
+      const declarations = {};
+      rule.block.children.forEach((declaration) => {
+        if (declaration.type === 'Declaration') declarations[declaration.property] = csstree.generate(declaration.value);
+      });
+      rule.prelude.children.forEach((selector) => {
+        const key = csstree.generate(selector);
+        navigationRules.set(key, { ...navigationRules.get(key), ...declarations });
+      });
+    } });
+    assert(navigationRules.get('.site-navigation ul.menu li>ul')?.display === 'none', id + ': submenu hiding must override the nested-menu display rule');
+    const disclosureStyle = navigationRules.get('.site-navigation .menu-disclosure');
+    assert(disclosureStyle?.margin === '0' && disclosureStyle?.border === '0', id + ': disclosure inherits details spacing');
+    assert(navigationRules.get('.site-navigation .menu-disclosure>summary')?.padding === '0', id + ': summary inherits extra padding');
+    assert(navigationRules.get('.site-navigation .menu-disclosure:not([open])>ul.menu')?.display === 'none', id + ': closed disclosure children visible');
+    // Page-less parents must expose their children without JavaScript.
+    const menuSource = await fs.readFile(path.join(dir, 'templates/navigation/menu--main.html.twig'), 'utf8');
+    const attributes = () => ({ addClass() { return this; }, toString() { return ''; } });
+    Twig.extendFunction('link', (title, url) => '<a href="' + (url.path || '#') + '">' + title + '</a>');
+    const menuTemplate = Twig.twig({ data: menuSource, rethrow: true });
+    const child = { title: 'Child page', url: { path: '/child' }, attributes: attributes(), below: [] };
+    for (const routeName of ['<nolink>', '<button>']) {
+      const markup = menuTemplate.render({ attributes: attributes(), items: [{ title: 'Parent', url: { isRouted: true, routeName }, attributes: attributes(), below: [child] }] });
+      const rendered = parseHTML(markup).document;
+      assert(rendered.querySelector('details > summary')?.textContent === 'Parent', id + ': page-less parent has no native disclosure');
+      assert(rendered.querySelector('details a')?.getAttribute('href') === '/child', id + ': child link missing');
+      assert(!rendered.querySelector('details[open]'), id + ': disclosure open by default');
+    }
+    const linkedMarkup = menuTemplate.render({ attributes: attributes(), items: [{ title: 'Parent page', url: { path: '/parent', isRouted: true, routeName: 'entity.node.canonical' }, attributes: attributes(), below: [child] }] });
+    const linkedMenu = parseHTML(linkedMarkup).document;
+    assert(!linkedMenu.querySelector('details') && linkedMenu.querySelector('a')?.getAttribute('href') === '/parent' && linkedMenu.querySelector('ul ul a'), id + ': linked parent navigation changed');
     const walk = async (current) => {
       for (const entry of await fs.readdir(current, { withFileTypes: true })) {
         const file = path.join(current, entry.name);
@@ -52,7 +87,7 @@ export async function validate(root) {
           counts.css++;
         }
         if (file.endsWith('.js')) new vm.Script(await fs.readFile(file, 'utf8'));
-        if (file.endsWith('.twig') && (file.includes(path.join('templates', 'design')) || file.endsWith(path.join('layout', 'page.html.twig')))) {
+        if (file.endsWith('.twig') && (file.includes(path.join('templates', 'design')) || file.endsWith(path.join('layout', 'page.html.twig')) || file.endsWith('menu--main.html.twig'))) {
           const text = await fs.readFile(file, 'utf8');
           assert(!text.includes('|raw'), id + ': unsafe raw markup in custom template');
           Twig.twig({ data: text, rethrow: true });
