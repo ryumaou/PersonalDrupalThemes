@@ -63,6 +63,22 @@ export async function validate(root) {
     assert(disclosureStyle?.margin === '0' && disclosureStyle?.border === '0', id + ': disclosure inherits details spacing');
     assert(navigationRules.get('.site-navigation .menu-disclosure>summary')?.padding === '0', id + ': summary inherits extra padding');
     assert(navigationRules.get('.site-navigation .menu-disclosure:not([open])>ul.menu')?.display === 'none', id + ': closed disclosure children visible');
+    // Sidebar block wrappers must work without a header navigation ancestor.
+    assert(navigationRules.get('.site-sidebar .block-menu ul.menu')?.display === 'block', id + ': sidebar menu is not vertical');
+    const sidebarList = navigationRules.get('.site-sidebar .block-menu ul.menu li>ul');
+    assert(sidebarList?.display === 'none' && sidebarList?.position === 'static' && sidebarList?.['padding-inline-start'] === '20px', id + ': sidebar submenus are visible or not indented');
+    assert(navigationRules.get('.site-sidebar .block-menu ul.menu li:hover>ul')?.display === 'block' && navigationRules.get('.site-sidebar .block-menu ul.menu li:focus-within>ul')?.display === 'block', id + ': sidebar submenus cannot open on hover or focus');
+    assert(navigationRules.get('.site-sidebar .block-menu .menu-disclosure:not([open])>ul.menu')?.display === 'none', id + ': closed sidebar disclosure shows children');
+    const sidebarDetails = navigationRules.get('.site-sidebar .block-menu .menu-disclosure');
+    assert(sidebarDetails?.margin === '0' && sidebarDetails?.border === '0', id + ': sidebar disclosure inherits form details styles');
+    assert(navigationRules.get('.site-sidebar .block-menu ul.menu li:has(>details.menu-disclosure)')?.['list-style'] === 'none' && !navigationRules.get('.site-sidebar .block-menu ul.menu li')?.['list-style'], id + ': sidebar triangles missing or duplicated');
+    for (const side of ['left', 'right']) {
+      const sidebarFixture = parseHTML('<aside class="site-sidebar site-sidebar--' + side + '"><nav class="block block-menu menu--main"><ul class="menu"><li id="group" class="menu-item--expanded"><details class="menu-disclosure"><summary>Group</summary><ul class="menu"><li><a href="/child">Child</a></li></ul></details></li><li id="page" class="menu-item--expanded"><a href="/parent">Page</a><ul class="menu"><li><a href="/child">Child</a></li></ul></li></ul></nav></aside><header><nav class="block-menu"><ul class="menu"><li><a href="/parent">Header</a><ul class="menu"><li><a href="/child">Child</a></li></ul></li></ul></nav></header>').document;
+      const reset = Array.from(sidebarFixture.querySelectorAll('.site-sidebar .block-menu ul.menu li:has(> details.menu-disclosure)'));
+      assert(reset.length === 1 && reset[0].id === 'group', id + ': sidebar marker scope incorrect on ' + side);
+      const hidden = Array.from(sidebarFixture.querySelectorAll('.site-sidebar .block-menu ul.menu li > ul'));
+      assert(hidden.length === 1 && hidden[0].parentElement.id === 'page', id + ': linked sidebar submenu scope incorrect on ' + side);
+    }
     // Page-less parents must expose their children without JavaScript.
     const menuSource = await fs.readFile(path.join(dir, 'templates/navigation/menu--main.html.twig'), 'utf8');
     const attributes = () => ({ addClass() { return this; }, toString() { return ''; } });
@@ -106,9 +122,22 @@ export async function validate(root) {
     const page = await fs.readFile(path.join(dir, 'templates/layout/page.html.twig'), 'utf8');
     for (const region of Object.keys(info.regions)) assert(page.includes('page.' + region), id + ': unrendered region: ' + region);
     assert(page.includes('id="main-content"'), id + ': missing skip-link destination');
+    assert(/<nav\s+class="site-navigation"/.test(page), id + ': primary menu is outside the shared navigation styles');
+    if (id === 'substack') {
+      assert(navigationRules.get('.site-sidebar--left .site-navigation ul.menu')?.display === 'block', 'substack: sidebar menu must stay vertical');
+      const sidebarChildren = navigationRules.get('.site-sidebar--left .site-navigation ul.menu li>ul');
+      assert(sidebarChildren?.display === 'none' && sidebarChildren?.position === 'static', 'substack: sidebar children must be hidden in normal document flow');
+      assert(navigationRules.get('.site-sidebar--left .site-navigation ul.menu li:hover>ul')?.display === 'block', 'substack: hover does not expose sidebar children');
+      assert(navigationRules.get('.site-sidebar--left .site-navigation ul.menu li:focus-within>ul')?.display === 'block', 'substack: focus does not expose sidebar children');
+      assert(navigationRules.get('.site-sidebar--left .site-navigation .menu-disclosure>ul.menu')?.position === 'static', 'substack: disclosure children must be indented in the sidebar');
+    }
     const html = await fs.readFile(path.join(root, 'previews', id + '.html'), 'utf8');
     const { window, document } = parseHTML(html);
     assert(document.querySelector('main') && document.querySelector('h1'), id + ': invalid preview landmarks');
+    if (id === 'substack') {
+      assert(document.querySelector('.site-sidebar--left .site-navigation li > a + ul.menu'), 'substack: preview missing linked-parent submenu');
+      assert(document.querySelectorAll('.site-sidebar--left .site-navigation details.menu-disclosure').length === 2 && !document.querySelector('.site-navigation details[open]'), 'substack: preview missing closed nested disclosures');
+    }
     for (const link of document.querySelectorAll('link[rel=stylesheet], script[src]')) await fs.access(path.resolve(root, 'previews', link.getAttribute('href') || link.getAttribute('src')));
     const marked = new WeakMap();
     const once = (key, selector, context) => Array.from(context.querySelectorAll(selector)).filter((el) => { const keys = marked.get(el) || new Set(); if (keys.has(key)) return false; keys.add(key); marked.set(el, keys); return true; });

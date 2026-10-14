@@ -50,3 +50,7 @@ Open the repository preview gallery for a sample-content view. See VALIDATION.md
 ### Dropdown availability
 
 Main menu blocks starting at level 1 load enabled children for linked and page-less parents on every page. Set displayed levels to at least two (or Unlimited); a one-level block intentionally has no dropdown children. Menu access checks, sorting and active-trail highlighting remain in effect. Rebuild Drupal caches after replacing the theme files, including includes/navigation.inc.
+
+### Menus placed in sidebar regions
+
+Menu blocks in either sidebar use vertical lists with indented children. Linked parents show children on hover or keyboard focus. Main-menu page-less parents use native disclosures, closed initially, with one triangle. These styles target Drupal’s block-menu wrapper and do not require a site-navigation wrapper in the sidebar. The existing block depth/access settings still apply. Install the updated stylesheet and library definition, then rebuild caches. Design library version: 1.0.6.

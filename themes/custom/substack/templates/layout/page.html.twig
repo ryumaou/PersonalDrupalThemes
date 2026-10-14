@@ -4,7 +4,7 @@
   <div class="site-grid has-left{{ page.sidebar_second ? ' has-right' : '' }}">
     <aside class="site-sidebar site-sidebar--left" aria-label="{{ 'Site navigation'|t }}">
       {{ page.header }}
-      {% if page.primary_menu %}<nav aria-label="{{ 'Primary navigation'|t }}">{{ page.primary_menu }}</nav>{% endif %}
+      {% if page.primary_menu %}<nav class="site-navigation" aria-label="{{ 'Primary navigation'|t }}">{{ page.primary_menu }}</nav>{% endif %}
       {{ page.secondary_menu }}{{ page.sidebar_first }}
     </aside>
     <main class="site-content layout-content" id="main-content" tabindex="-1">

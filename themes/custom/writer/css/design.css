@@ -133,3 +133,53 @@ img[src*="/inline-images/"].align-center {
     margin: 1rem auto;
   }
 }
+
+/* Menu blocks placed in either sidebar use vertical, collapsible child lists. */
+.site-sidebar .block-menu ul.menu {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site-sidebar .block-menu ul.menu li {
+  position: relative;
+  padding: 0;
+}
+.site-sidebar .block-menu ul.menu li > ul,
+.site-sidebar .block-menu .menu-disclosure > ul.menu {
+  position: static;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 20px;
+  border: 0;
+  background: transparent;
+}
+.site-sidebar .block-menu ul.menu li > ul { display: none; }
+.site-sidebar .block-menu ul.menu li:hover > ul,
+.site-sidebar .block-menu ul.menu li:focus-within > ul { display: block; }
+.site-sidebar .block-menu ul.menu li:has(> details.menu-disclosure) {
+  list-style: none;
+}
+.site-sidebar .block-menu .menu-disclosure {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.site-sidebar .block-menu .menu-disclosure > summary {
+  margin: 0;
+  padding: 6px 12px;
+  color: var(--nav,var(--ink));
+  font-weight: 500;
+  cursor: pointer;
+}
+.site-sidebar .block-menu .menu-disclosure:not([open]) > ul.menu {
+  display: none;
+}
+.site-sidebar .block-menu ul.menu a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+.site-sidebar .block-menu ul.menu a:hover { text-decoration: underline; }

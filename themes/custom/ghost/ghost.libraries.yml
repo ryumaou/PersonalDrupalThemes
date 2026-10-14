@@ -113,7 +113,7 @@ user:
         weight: -10
 
 design:
-  version: 1.0.4
+  version: 1.0.6
   css:
     theme:
       css/tokens.css: {}

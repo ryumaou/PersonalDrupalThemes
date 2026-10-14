@@ -37,11 +37,13 @@ Main menu blocks starting at level 1 load dropdown children for both real page l
 
 Use Drupal's `<nolink>` or `<button>` destination for a parent that has no page. Parents with visible children use a native disclosure that opens with click, touch, Enter or Space, including when JavaScript is unavailable. Parents with real URLs retain their links. Primary-navigation list-item icons are suppressed only for parents with native disclosures, so page-less parents show one triangle and real page links retain their expanded/collapsed icons. Rebuild Drupal caches after installing these changes.
 
+Menu blocks placed in either sidebar also use vertical lists, hidden and indented children, hover/focus opening for linked parents, and native disclosures for page-less main-menu parents. This applies to all twelve themes, including Substack’s default sidebar layout.
+
 ## Inline images
 
 All themes keep editor uploads under /inline-images/ responsive, provide left/right spacing and centered alignment, and stack floated images on narrow screens. When an image retains its original upload URL but has filter-image-invalid and width/height both set to 16, CSS restores its natural dimensions without editing each content item. Other explicitly sized images retain their dimensions. Drupal error-icon URLs do not match this recovery rule. CSS cannot restore a missing file or change Drupal's image security validation; the filter's alt/title attributes also remain unchanged.
 
-Copy the updated theme files into your Drupal installation and rebuild caches (drush cache:rebuild). The design library version is now 1.0.4 to refresh aggregated assets.
+Copy the updated theme files into your Drupal installation and rebuild caches (drush cache:rebuild). Design library versions are 1.0.6 to refresh aggregated assets.
 
 ## Preview
 
