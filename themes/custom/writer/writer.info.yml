@@ -1,0 +1,40 @@
+name: Writer
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - writer/base
+  - writer/messages
+  - core/normalize
+  - writer/design
+libraries-extend:
+  user/drupal.user:
+    - writer/user
+  core/drupal.dropbutton:
+    - writer/dropbutton
+  core/drupal.dialog:
+    - writer/dialog
+  file/drupal.file:
+    - writer/file
+  core/drupal.item-list:
+    - writer/item-list
+  core/drupal.progress:
+    - writer/progress
+  core/drupal.tablesort:
+    - writer/drupal.tablesort
+description: "Editorial confidence, lavender accents, and geometric type"
+core_version_requirement: ^11
+generator: starterkit_theme:11.3.0
+regions:
+  header: Branding
+  primary_menu: Primary navigation
+  secondary_menu: Actions
+  breadcrumb: Breadcrumb
+  highlighted: Status messages
+  help: Help
+  hero: Hero
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  feature: Feature sections
+  footer: Footer

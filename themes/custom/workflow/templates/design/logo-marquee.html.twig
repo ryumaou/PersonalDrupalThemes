@@ -1,0 +1,2 @@
+{# logos: render arrays; duplicate track is decorative. Motion pauses on hover/focus. #}
+<div class="logo-marquee"><div class="logo-marquee__track"><div class="design-actions">{% for logo in logos %}{{ logo }}{% endfor %}</div><div class="design-actions" aria-hidden="true">{% for logo in logos %}{{ logo }}{% endfor %}</div></div></div>

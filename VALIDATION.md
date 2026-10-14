@@ -1,5 +1,17 @@
 # Validation
 
+## Four additional themes — October 14, 2026
+
+Added Attio, Branding, Workflow and Writer with independent starterkit files, reference tokens, local licensed fonts, reusable Twig components and static previews. All four copy the latest selective main-menu expansion hook and native disclosure template, including corrected spacing and submenu visibility. Existing themes were left unchanged.
+
+The complete scripts/validate.mjs function ran through Node with the pinned JS YAML, CSS Tree and Twig distributions and LinkeDOM 0.18.12's self-contained worker distribution. The shell tool could not initialize; npm was unavailable. Results: **12 themes, 1,692 upstream files, 228 custom Twig templates, 420 CSS files, 432 library assets, 411 CSS asset references and 9 preview tab suites passed**. Every theme also passed page-less parent and linked parent render checks, unique tab ID/repeated attachment checks, and carousel/reduced-motion checks.
+
+Additional checks verified the four navigation hooks exactly match the existing Ghost hook after theme-name substitution, two closed nested disclosures per new preview, and resolved CSS custom-property references. Git diff --check passed. The provenance validator now checks unchanged upstream bytes before reversing substitutions, so ordinary upstream uses of the word branding do not cause false failures for the Branding machine name.
+
+Fonts: Attio uses Inter / Inter Tight / Source Serif 4; Branding uses Inter / Playfair Display Italic; Workflow uses Crimson Pro / Inter / system Georgia; Writer uses Poppins / Spectral. OFL licenses accompany all bundled families. Branding's commercial ornamental display face is not supplied. Written Attio button constraints use 10px radius despite its contradictory prompt example; CSS range tokens are resolved to valid values.
+
+**Browser layout review and PHP/Drupal runtime testing remain unverified.** Use the existing installation follow-up checklist and the updated preview gallery for those checks.
+
 The repository has no Drupal installation, Composer vendor directory, PHP executable, or browser exposed to the browser automation tool. The themes were built using the official pinned Drupal 11.3.0 starterkit source and verified structurally. The native shell tool failed to initialize; filesystem work and validation were completed through Node instead.
 
 ## Executed checks

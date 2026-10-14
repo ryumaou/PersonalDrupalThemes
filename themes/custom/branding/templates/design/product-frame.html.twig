@@ -1,0 +1,5 @@
+{# image/content: render arrays supplied by Drupal; caption is plain text. #}
+<figure class="product-frame">
+  {% if caption %}<figcaption class="product-frame__bar">{{ caption }}</figcaption>{% endif %}
+  {{ image }}{{ content }}
+</figure>

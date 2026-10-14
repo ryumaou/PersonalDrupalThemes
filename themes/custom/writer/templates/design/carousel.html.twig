@@ -1,0 +1,2 @@
+{# items: render arrays; only controls require JS, native horizontal scrolling always works. #}
+<div class="design-carousel"><div class="design-carousel__track">{% for item in items %}{{ item }}{% endfor %}</div><div class="design-carousel__controls"><button type="button" data-carousel-step="-1" hidden aria-label="{{ 'Previous features'|t }}">←</button><button type="button" data-carousel-step="1" hidden aria-label="{{ 'Next features'|t }}">→</button></div></div>

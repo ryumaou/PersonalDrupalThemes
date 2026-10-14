@@ -1,0 +1,2 @@
+{# author/title: text; avatar/body/actions: render arrays; subscribe_url optional. #}
+<article class="feed-post"><div class="feed-post__header">{{ avatar }}<div><strong>{{ author }}</strong>{% if date %}<div class="metadata">{{ date }}</div>{% endif %}</div>{% if subscribe_url %}<a class="feed-post__subscribe" href="{{ subscribe_url }}">{{ 'Subscribe'|t }}</a>{% endif %}</div>{% if title %}<h2>{{ title }}</h2>{% endif %}<div class="feed-post__body">{{ body }}</div>{% if actions %}<div class="engagement-row">{{ actions }}</div>{% endif %}</article>

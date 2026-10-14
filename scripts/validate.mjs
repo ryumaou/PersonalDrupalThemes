@@ -25,7 +25,9 @@ export async function validate(root) {
       const target = source.replaceAll('starterkit_theme', id);
       const bytes = await fs.readFile(path.join(dir, target));
       const sourceBytes = source.endsWith('.png') ? bytes : Buffer.from(bytes.toString().split('\n// Custom navigation support.\n')[0].replaceAll(id, 'starterkit_theme').replaceAll(theme.name, 'Starterkit theme'));
-      assert(hash(sourceBytes) === expected, id + ': inherited file differs: ' + target);
+      // Unchanged upstream text may naturally contain the machine name (e.g. branding).
+      const originalPrefix = source.endsWith('.png') ? bytes : Buffer.from(bytes.toString().split('\n// Custom navigation support.\n')[0]);
+      assert(hash(originalPrefix) === expected || hash(sourceBytes) === expected, id + ': inherited file differs: ' + target);
       counts.upstreamFiles++;
     }
     const libraries = yaml.load(await fs.readFile(path.join(dir, id + '.libraries.yml'), 'utf8'));

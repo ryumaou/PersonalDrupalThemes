@@ -1,0 +1,40 @@
+name: Branding
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - branding/base
+  - branding/messages
+  - core/normalize
+  - branding/design
+libraries-extend:
+  user/drupal.user:
+    - branding/user
+  core/drupal.dropbutton:
+    - branding/dropbutton
+  core/drupal.dialog:
+    - branding/dialog
+  file/drupal.file:
+    - branding/file
+  core/drupal.item-list:
+    - branding/item-list
+  core/drupal.progress:
+    - branding/progress
+  core/drupal.tablesort:
+    - branding/drupal.tablesort
+description: "Black gallery wall, blood-red punctuation"
+core_version_requirement: ^11
+generator: starterkit_theme:11.3.0
+regions:
+  header: Branding
+  primary_menu: Primary navigation
+  secondary_menu: Actions
+  breadcrumb: Breadcrumb
+  highlighted: Status messages
+  help: Help
+  hero: Hero
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  feature: Feature sections
+  footer: Footer

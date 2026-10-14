@@ -1,0 +1,40 @@
+name: Workflow
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - workflow/base
+  - workflow/messages
+  - core/normalize
+  - workflow/design
+libraries-extend:
+  user/drupal.user:
+    - workflow/user
+  core/drupal.dropbutton:
+    - workflow/dropbutton
+  core/drupal.dialog:
+    - workflow/dialog
+  file/drupal.file:
+    - workflow/file
+  core/drupal.item-list:
+    - workflow/item-list
+  core/drupal.progress:
+    - workflow/progress
+  core/drupal.tablesort:
+    - workflow/drupal.tablesort
+description: "An editorial manuscript on warm linen"
+core_version_requirement: ^11
+generator: starterkit_theme:11.3.0
+regions:
+  header: Branding
+  primary_menu: Primary navigation
+  secondary_menu: Actions
+  breadcrumb: Breadcrumb
+  highlighted: Status messages
+  help: Help
+  hero: Hero
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  feature: Feature sections
+  footer: Footer

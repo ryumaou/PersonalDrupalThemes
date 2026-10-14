@@ -1,9 +1,13 @@
 # Personal Drupal Themes
 
-Eight independent Drupal 11 themes based on the style references in DesignFiles. Each includes the actual Drupal 11.3.0 core starterkit templates, CSS, icons and preprocessing hook, renamed and configured like generated themes, then extended with its own design. The core Stable9 base theme is retained, as in the official starterkit. No theme depends on another theme in this repository.
+Twelve independent Drupal 11 themes based on the style references in DesignFiles. Each includes the actual Drupal 11.3.0 core starterkit templates, CSS, icons and preprocessing hook, renamed and configured like generated themes, then extended with its own design. The core Stable9 base theme is retained, as in the official starterkit. No theme depends on another theme in this repository.
 
 | Design document | Theme | Machine name |
 | --- | --- | --- |
+| [AttioDesign.md](DesignFiles/AttioDesign.md) | Attio | [attio](themes/custom/attio) |
+| [BrandingDesign.md](DesignFiles/BrandingDesign.md) | Branding | [branding](themes/custom/branding) |
+| [WorkflowDesign.md](DesignFiles/WorkflowDesign.md) | Workflow | [workflow](themes/custom/workflow) |
+| [WriterDesign.md](DesignFiles/WriterDesign.md) | Writer | [writer](themes/custom/writer) |
 | [14IslandsDesign.md](DesignFiles/14IslandsDesign.md) | 14islands | [fourteen_islands](themes/custom/fourteen_islands) |
 | [BPowellDeisgn.md](DesignFiles/BPowellDeisgn.md) | Bpowell | [bpowell](themes/custom/bpowell) |
 | [EvernoteDesign.md](DesignFiles/EvernoteDesign.md) | Evernote | [evernote](themes/custom/evernote) |

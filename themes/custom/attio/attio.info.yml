@@ -1,0 +1,40 @@
+name: Attio
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - attio/base
+  - attio/messages
+  - core/normalize
+  - attio/design
+libraries-extend:
+  user/drupal.user:
+    - attio/user
+  core/drupal.dropbutton:
+    - attio/dropbutton
+  core/drupal.dialog:
+    - attio/dialog
+  file/drupal.file:
+    - attio/file
+  core/drupal.item-list:
+    - attio/item-list
+  core/drupal.progress:
+    - attio/progress
+  core/drupal.tablesort:
+    - attio/drupal.tablesort
+description: "Architectural editorial on white marble"
+core_version_requirement: ^11
+generator: starterkit_theme:11.3.0
+regions:
+  header: Branding
+  primary_menu: Primary navigation
+  secondary_menu: Actions
+  breadcrumb: Breadcrumb
+  highlighted: Status messages
+  help: Help
+  hero: Hero
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  feature: Feature sections
+  footer: Footer

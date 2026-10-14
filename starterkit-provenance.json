@@ -43,6 +43,26 @@
       "design": "SubstackDesgin.md",
       "machine_name": "substack",
       "name": "Substack"
+    },
+    {
+      "design": "AttioDesign.md",
+      "machine_name": "attio",
+      "name": "Attio"
+    },
+    {
+      "design": "BrandingDesign.md",
+      "machine_name": "branding",
+      "name": "Branding"
+    },
+    {
+      "design": "WorkflowDesign.md",
+      "machine_name": "workflow",
+      "name": "Workflow"
+    },
+    {
+      "design": "WriterDesign.md",
+      "machine_name": "writer",
+      "name": "Writer"
     }
   ],
   "source_sha256": {

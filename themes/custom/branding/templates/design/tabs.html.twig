@@ -1,0 +1,2 @@
+{# tabs: [{label,content}]. Every panel is readable before JS enhancement. #}
+<div class="design-tabs{{ tinted ? ' design-tabs--tinted' : '' }}"><div data-tab-list aria-label="{{ label|default('Features')|t }}">{% for tab in tabs %}<button type="button" data-tab>{{ tab.label }}</button>{% endfor %}</div>{% for tab in tabs %}<section data-tab-panel><h3>{{ tab.label }}</h3>{{ tab.content }}</section>{% endfor %}</div>
