@@ -46,3 +46,7 @@ Written design constraints take precedence over inconsistent quick-start tokens.
 ## Verification
 
 Open the repository preview gallery for a sample-content view. See VALIDATION.md at the repository root for checks performed and remaining Drupal/browser checks. No running Drupal installation is available in this repository.
+
+### Dropdown availability
+
+Main menu blocks starting at level 1 load enabled children for linked and page-less parents on every page. Set displayed levels to at least two (or Unlimited); a one-level block intentionally has no dropdown children. Menu access checks, sorting and active-trail highlighting remain in effect. Rebuild Drupal caches after replacing the theme files, including includes/navigation.inc.

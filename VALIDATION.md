@@ -49,3 +49,27 @@ Removed inherited details margins/border and summary padding from navigation dis
 Replaced blanket expand-all rebuilding with the current-route menu parameters plus only the reachable <nolink>/<button> parent IDs. Regular page links retain their configured expansion/active-trail behavior; disabled links, access checks, sorting, configured depth and cache metadata are preserved. The block’s explicitly enabled Expand all items setting remains respected.
 
 All eight changed CSS files parse and pass the new spacing/visibility assertions in scripts/validate.mjs. All 24 Twig menu cases pass, including closed-by-default disclosures, and 1,128 inherited files/prefixes still match provenance. Validator syntax also passes. PHP is unavailable (php executable not found), so the selective tree hook and actual browser layout still need Drupal runtime verification. The complete npm validator was not run.
+
+## Inline-image CSS correction
+
+Updated all twelve design stylesheets and advanced each design library to version 1.0.1. The reported retained-upload image uses natural dimensions despite its 16-by-16 HTML attributes. Explicitly sized valid images remain sized, and Drupal replacement error icons and site logos are excluded from the recovery selector. Uploaded inline images receive responsive sizing, alignment spacing and mobile stacking.
+
+All twelve selector fixtures passed (reported image, intentionally sized image, core error icon and logo), all changed CSS parsed, and library version checks passed. The complete validator also passed: 12 themes, 1,692 inherited files, 228 custom Twig templates, 420 CSS files, 432 library assets, 411 CSS asset references and 9 tab suites. These checks used the pinned parsers through Node as described above. Browser layout and Drupal runtime testing remain unverified. This is a display correction for retained URLs; it does not bypass Drupal filtering or repair missing files.
+
+## Duplicate menu triangle correction
+
+All twelve design stylesheets suppress list-style on primary-navigation list items. This overrides the starterkit expanded/collapsed list-style-image icons, including the RTL collapsed icon, while leaving the native summary disclosure marker intact. The rule covers nested menu items as well. Form details and menus outside primary navigation retain their existing styling. Design library versions advance to 1.0.2.
+
+Added an assertion to scripts/validate.mjs for the primary-navigation marker reset. The full validator passed across all twelve themes with the existing menu render, CSS visibility/spacing, interaction and provenance checks. Git diff --check passed. Browser appearance and Drupal runtime verification remain pending.
+
+## Linked-parent menu triangle correction
+
+Narrowed the primary-navigation marker reset in all twelve themes to li:has(> details.menu-disclosure). Only list items with their own native disclosure lose the inherited image marker; linked expanded/collapsed parents, including linked parents nested inside disclosure groups, retain starterkit triangles and RTL variants. Design libraries advance to 1.0.3.
+
+The validator now rejects blanket list-item suppression and checks a fixture with page-less, linked expanded, linked collapsed and nested linked parents. The reset matches only the page-less parent. Full validation passed across all twelve themes; git diff --check passed. Browser layout and Drupal runtime verification remain pending.
+
+## Dropdown availability on unrelated routes
+
+Updated all twelve navigation preprocessing hooks to clear the expandedParents loading restriction on root-level main-menu blocks that permit child levels. Both linked and page-less parents now load their enabled dropdown children independently of the current route or individual Expanded checkbox. Active-trail highlighting remains; configured maximum depth, access transformation, sorting and merged cache metadata remain in place. Lower-level blocks, single-level blocks and explicitly expanded core blocks retain their existing handling. Design library versions advance to 1.0.4.
+
+The full structural/DOM validator passed for twelve themes, including menu marker and linked-parent rendering checks. All twelve hooks were checked for identical implementation after normalizing theme names. Git diff --check passed. PHP is not installed and no Drupal runtime is available, so actual off-route menu loading and PHP execution remain unverified here. Test a linked parent with Expanded unchecked from an unrelated route after deploying and rebuilding caches. This change supersedes earlier descriptions of selective page-less-only expansion.

@@ -33,9 +33,15 @@ Each theme’s README explains regions, reusable Twig components and font choice
 
 ## Main menu subitems
 
-Main menu blocks starting at level 1 include children of page-less parents even when those parents are not marked Expanded. Regular page links keep Drupal’s configured expansion and active-trail behavior. Configured menu depth remains respected; a block limited to one level still shows only that level. Set its displayed levels to Unlimited (or at least two) to show subitems.
+Main menu blocks starting at level 1 load dropdown children for both real page links and page-less parents on every route, even when those parents are not marked Expanded. The current page still receives Drupal’s active-trail highlighting. Configured menu depth remains respected; a block limited to one level still shows only that level. Set its displayed levels to Unlimited (or at least two) to show subitems.
 
-Use Drupal's `<nolink>` or `<button>` destination for a parent that has no page. Parents with visible children use a native disclosure that opens with click, touch, Enter or Space, including when JavaScript is unavailable. Parents with real URLs retain their links. Rebuild Drupal caches after installing these changes.
+Use Drupal's `<nolink>` or `<button>` destination for a parent that has no page. Parents with visible children use a native disclosure that opens with click, touch, Enter or Space, including when JavaScript is unavailable. Parents with real URLs retain their links. Primary-navigation list-item icons are suppressed only for parents with native disclosures, so page-less parents show one triangle and real page links retain their expanded/collapsed icons. Rebuild Drupal caches after installing these changes.
+
+## Inline images
+
+All themes keep editor uploads under /inline-images/ responsive, provide left/right spacing and centered alignment, and stack floated images on narrow screens. When an image retains its original upload URL but has filter-image-invalid and width/height both set to 16, CSS restores its natural dimensions without editing each content item. Other explicitly sized images retain their dimensions. Drupal error-icon URLs do not match this recovery rule. CSS cannot restore a missing file or change Drupal's image security validation; the filter's alt/title attributes also remain unchanged.
+
+Copy the updated theme files into your Drupal installation and rebuild caches (drush cache:rebuild). The design library version is now 1.0.4 to refresh aggregated assets.
 
 ## Preview
 

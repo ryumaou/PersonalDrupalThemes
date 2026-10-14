@@ -53,6 +53,11 @@ export async function validate(root) {
         navigationRules.set(key, { ...navigationRules.get(key), ...declarations });
       });
     } });
+    assert(navigationRules.get('.site-navigation ul.menu li:has(>details.menu-disclosure)')?.['list-style'] === 'none', id + ': inherited icons duplicate native disclosure markers');
+    assert(navigationRules.get('.site-navigation ul.menu li')?.['list-style'] !== 'none', id + ': linked parent menu icons are suppressed');
+    const markerFixture = parseHTML('<nav class="site-navigation"><ul class="menu"><li id="page-less" class="menu-item--expanded"><details class="menu-disclosure"><summary>Group</summary><ul class="menu"><li id="nested-link" class="menu-item--expanded"><a href="/nested">Nested page</a><ul class="menu"><li><a href="/child">Child</a></li></ul></li></ul></details></li><li id="linked" class="menu-item--expanded"><a href="/parent">Parent page</a><ul class="menu"><li><a href="/child">Child</a></li></ul></li><li id="collapsed" class="menu-item--collapsed"><a href="/other">Other page</a></li></ul></nav>').document;
+    const suppressedMarkers = Array.from(markerFixture.querySelectorAll('.site-navigation ul.menu li:has(> details.menu-disclosure)'));
+    assert(suppressedMarkers.length === 1 && suppressedMarkers[0].id === 'page-less', id + ': disclosure marker reset affects linked or nested parents');
     assert(navigationRules.get('.site-navigation ul.menu li>ul')?.display === 'none', id + ': submenu hiding must override the nested-menu display rule');
     const disclosureStyle = navigationRules.get('.site-navigation .menu-disclosure');
     assert(disclosureStyle?.margin === '0' && disclosureStyle?.border === '0', id + ': disclosure inherits details spacing');

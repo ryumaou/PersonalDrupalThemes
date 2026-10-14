@@ -14,7 +14,7 @@ function writer_preprocess_block(array &$variables): void {
   }
 
   $configuration = $variables['configuration'];
-  // Preserve intentionally limited, active-trail-only and expand-all blocks.
+  // Preserve blocks starting below the root, single-level blocks and core expand-all.
   if ((int) ($configuration['level'] ?? 1) !== 1 || (int) ($configuration['depth'] ?? 0) === 1 || !empty($configuration['expand_all_items'])) {
     return;
   }
@@ -27,30 +27,10 @@ function writer_preprocess_block(array &$variables): void {
     $parameters->setMaxDepth(min($depth, $menu_tree->maxDepth()));
   }
 
-  // Inspect enabled links, but retain the normal expansion list for rendering.
-  $discovery_parameters = clone $parameters;
-  $discovery_parameters->expandedParents = [];
-  $discovery_tree = $menu_tree->load('main', $discovery_parameters);
-  $additional_parents = [];
-  $collect = function (array $tree) use (&$collect, &$additional_parents, $parameters): void {
-    foreach ($tree as $element) {
-      $url = $element->link->getUrlObject();
-      $page_less = $url->isRouted() && in_array($url->getRouteName(), ['<nolink>', '<button>'], TRUE);
-      $plugin_id = $element->link->getPluginId();
-      if ($page_less && $element->subtree) {
-        $additional_parents[] = $plugin_id;
-      }
-      // Do not expose descendants beneath a regular collapsed page link.
-      if ($page_less || !$parameters->expandedParents || in_array($plugin_id, $parameters->expandedParents, TRUE)) {
-        $collect($element->subtree);
-      }
-    }
-  };
-  $collect($discovery_tree);
-  if (!$additional_parents) {
-    return;
-  }
-  $parameters->addExpandedParents($additional_parents);
+  // Load dropdown children on every route for both linked and page-less parents.
+  // An empty expansion restriction loads the full enabled tree within maxDepth.
+  // Keep activeTrail so Drupal can still highlight the current page.
+  $parameters->expandedParents = [];
   $tree = $menu_tree->load('main', $parameters);
   $tree = $menu_tree->transform($tree, [
     ['callable' => 'menu.default_tree_manipulators:checkAccess'],

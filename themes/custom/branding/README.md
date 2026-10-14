@@ -41,7 +41,7 @@ CSS utility classes include design-grid, design-actions, design-button, design-b
 
 Tokens are in css/tokens.css, local fonts in css/fonts.css and styling in css/design.css. Commercial brand fonts are not supplied. Open-license substitutes are bundled with OFL license files under fonts; Appearance does not download third-party fonts. To use an owned brand font, add a local @font-face rule using the family named in the design document. Substitute families are declared in css/fonts.css.
 
-Written design constraints take precedence over inconsistent quick-start tokens. CSS range tokens use valid values. The inherited menu includes native disclosures for page-less parents, selective child expansion, configured depth, access checks, cache metadata, and the corrected disclosure spacing and visibility. Rebuild caches after installing.
+Written design constraints take precedence over inconsistent quick-start tokens. CSS range tokens use valid values. The menu loads linked and page-less parents’ dropdown children on every route, preserving configured depth, access checks, cache metadata, active-trail highlighting and corrected disclosure spacing and visibility. Rebuild caches after installing.
 
 ## Verification
 
@@ -53,4 +53,8 @@ Inter substitutes Kmr Waldenburg; Playfair Display Italic substitutes Editorialn
 
 ## Main menu
 
-Use `<nolink>` or `<button>` for page-less parents. Children appear even with Expanded unchecked when the block starts at level 1 and permits at least two levels. Native disclosures support click, touch, Enter and Space without JavaScript. Real URLs keep their links and configured expansion. The preview demonstrates page-less, nested and linked parents.
+Use `<nolink>` or `<button>` for page-less parents. Children appear even with Expanded unchecked when the block starts at level 1 and permits at least two levels. Native disclosures support click, touch, Enter and Space without JavaScript. Real URLs keep their links; both linked and page-less parents load dropdown children on every route. The preview demonstrates page-less, nested and linked parents.
+
+### Dropdown availability
+
+Main menu blocks starting at level 1 load enabled children for linked and page-less parents on every page. Set displayed levels to at least two (or Unlimited); a one-level block intentionally has no dropdown children. Menu access checks, sorting and active-trail highlighting remain in effect. Rebuild Drupal caches after replacing the theme files, including includes/navigation.inc.

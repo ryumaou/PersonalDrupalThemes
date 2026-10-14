@@ -17,6 +17,8 @@ button:disabled { cursor: default; opacity: .5; }
 .site-brand .site-slogan { font-size: 14px; }
 .site-navigation ul.menu,.site-actions ul.menu { display: flex; gap: 24px; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
 .site-navigation li,.site-actions li { padding: 0; }
+/* Suppress the inherited triangle only when a native disclosure supplies it. */
+.site-navigation ul.menu li:has(> details.menu-disclosure) { list-style: none; }
 .site-navigation a,.site-navigation .menu-disclosure > summary { color: var(--nav,var(--ink)); text-decoration: none; }
 .site-navigation ul.menu ul { display: block; padding-inline-start: 16px; }
 .site-navigation li:has(> ul) { position: relative; }
@@ -119,3 +121,39 @@ blockquote { margin-inline: 0; padding-inline-start: 24px; border-inline-start: 
 
 /* Closed disclosures and unfocused page submenus stay hidden. */
 .site-navigation .menu-disclosure:not([open]) > ul.menu { display: none; }
+
+/* Inline editor images: preserve author sizing and keep uploads responsive. */
+img[src*="/inline-images/"] {
+  max-width: 100%;
+  height: auto;
+}
+/* Recover natural dimensions only when the filter left the original upload URL.
+   A replaced error-icon URL does not match; CSS cannot restore removed files. */
+img[src*="/inline-images/"].filter-image-invalid[width="16"][height="16"] {
+  width: auto;
+  height: auto;
+}
+img[src*="/inline-images/"].align-left {
+  float: left;
+  max-width: calc(100% - 1.5rem);
+  margin: 0 1.5rem 1rem 0;
+}
+img[src*="/inline-images/"].align-right {
+  float: right;
+  max-width: calc(100% - 1.5rem);
+  margin: 0 0 1rem 1.5rem;
+}
+img[src*="/inline-images/"].align-center {
+  display: block;
+  float: none;
+  margin: 1rem auto;
+}
+@media (max-width: 600px) {
+  img[src*="/inline-images/"].align-left,
+  img[src*="/inline-images/"].align-right {
+    display: block;
+    float: none;
+    max-width: 100%;
+    margin: 1rem auto;
+  }
+}
